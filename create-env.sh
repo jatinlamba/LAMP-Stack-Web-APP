@@ -2,14 +2,16 @@
 
 echo "imageId is : $1"
 
+echo "key name is : $2"
+
+echo "security group is : $3"
+
+echo "launch configuration name is : $4"
+
+echo "count is : $5"
+
 File='file://installapp.sh'
 echo "script file is : $File"
-
-keyName='inclass'
-echo "key name is : $keyName"
-
-securityGroup='sg-998e44e0'
-echo "security group is : $securityGroup"
 
 instanceType='t2.micro'
 echo "instance type is : $instanceType"
@@ -25,9 +27,6 @@ echo "subnet id is : $subnetId"
 
 loadBalancerName='itmo-544-jl'
 echo "load balancer is : $loadBalancerName"
-
-autoScalingLCN='jlserverlaunch'
-echo "launch configuration name is : $autoScalingLCN"
 
 autoScalingGrpName='jlwebserver'
 echo "auto scaling group name is : $autoScalingGrpName"
