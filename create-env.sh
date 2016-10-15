@@ -31,10 +31,10 @@ echo "load balancer is : $loadBalancerName"
 autoScalingGrpName='jlwebserver'
 echo "auto scaling group name is : $autoScalingGrpName"
 
-## Logic to check if user entered has entered 5 parameters else give error and exit the script
+## check if user has entered 5 parameters else error is given and the script is exited
 
 if [ $# != 5 ]
-then echo "To run this script, provide 5 arguments in the following order. 
+then echo "Provide 5 arguments in the following order to run the script successfully!! 
 
  1. AMI-IMAGE ID 
  2. Key Name  
@@ -48,12 +48,14 @@ fi
 
 #clientToken= $(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 36 | head -n 1)
 
-## AWS command to create ec2 instances
+## launch instances
 
 aws ec2 run-instances --image-id $1 --key-name $2 --security-group-ids $3 --instance-type t2.micro --placement $placementZone --count $5 --user-data $File 
-#--client-token $clientToken 
+#--client-token $clientToken
 
-#aws ec2 wait instance-running --filters "Name=client-token,Values=$clientToken"
+## Wait for instances to start 
+
+##aws ec2 wait instance-running --filters "Name=client-token,Values= $clientToken"
 
 ## Create load balancer
 
@@ -71,6 +73,21 @@ echo $instanceId
 ## register instances to the created Load Balanacer
 
 aws elb register-instances-with-load-balancer --load-balancer-name $loadBalancerName --instances $instanceId
+
+## pausing the script till all instances are in InService state in loadbalancer by using while loop
+
+SOURCE="OutOfService"
+flag="0"
+while [ $flag -eq 0 ]
+do
+status=`aws elb describe-instance-health --load-balancer-name $loadBalancerName --query 'InstanceStates[*].State'`
+if echo "$status" | grep -q "$SOURCE";
+then
+flag="0"
+else
+flag="1"
+fi
+done
 
 ##create autoscale launch config
 
