@@ -36,49 +36,44 @@ echo "auto scaling group name is : $autoScalingGrpName"
 if [ $# != 5 ]
 then echo "Provide 5 arguments in the following order to run the script successfully!! 
 
- 1. AMI-IMAGE ID 
- 2. Key Name  
- 3. Security Group 
- 4. Launch Configuration 
- 5. Count"
+ 1 -- AMI-IMAGE ID 
+ 2 -- Key Name  
+ 3 -- Security Group 
+ 4 -- Launch Configuration 
+ 5 -- Count"
 exit 1
 fi
 
-## Generating random and case sensitive string of 36b ASCII characters for obtaining unique clientToken
+## Generating random and case sensitive string of 36b ASCII characters for obtaining unique client token
 
-#clientToken= $(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 36 | head -n 1)
+clientToken=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 36 | head -n 1)
 
 ## launch instances
 
-aws ec2 run-instances --image-id $1 --key-name $2 --security-group-ids $3 --instance-type t2.micro --placement $placementZone --count $5 --user-data $File 
-#--client-token $clientToken
+aws ec2 run-instances --image-id $1 --key-name $2 --security-group-ids $3 --instance-type $instanceType --placement $placementZone --count $5 --user-data $File --client-token $clientToken
 
-## Wait for instances to start 
+## Wait for instances to start
+ 
+aws ec2 wait instance-running --filters "Name=client-token,Values=$clientToken"
 
-##aws ec2 wait instance-running --filters "Name=client-token,Values= $clientToken"
+## Create Load Balancer
 
-## Create load balancer
-
-aws elb create-load-balancer --load-balancer-name $loadBalancerName --listeners "Protocol=Http,LoadBalancerPort=80,InstanceProtocol=Http,InstancePort=80" --subnets $subnetId --security-groups $securityGroup
+aws elb create-load-balancer --load-balancer-name $loadBalancerName --listeners "Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80" --availability-zones $availabilityZone
 
 ## Retrieving instance Ids
 
-instanceId=`aws ec2 describe-instances --filters 'Name=instance-state-name,Values=pending' --query 'Reservations[*].Instances[].InstanceId'`
+instanceId=`aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" --query 'Reservations[*].Instances[].InstanceId'`
 
-## Wait command till instances starts running
-
-aws ec2 wait instance-running --instance-ids $instanceId
-echo $instanceId
-
-## register instances to the created Load Balanacer
+## Register instances to the created Load Balanacer
 
 aws elb register-instances-with-load-balancer --load-balancer-name $loadBalancerName --instances $instanceId
+echo $instanceId
 
-## pausing the script till all instances are in InService state in loadbalancer by using while loop
+## Pausing the script till all the instances are in InService state in load balancer by using while loop
 
 SOURCE="OutOfService"
 flag="0"
-while [ $flag -eq 0 ]
+while [ $flag != 0 ]
 do
 status=`aws elb describe-instance-health --load-balancer-name $loadBalancerName --query 'InstanceStates[*].State'`
 if echo "$status" | grep -q "$SOURCE";
@@ -89,12 +84,12 @@ flag="1"
 fi
 done
 
-##create autoscale launch config
+## Create luanch configuration
 
-aws autoscaling create-launch-configuration --launch-configuration-name $4 --image-id $1 --key-name $2 --security-groups $3 --instance-type $instanceType --user-data $File 
+aws autoscaling create-launch-configuration --launch-configuration-name $4 --key-name $2 --image-id $1 --instance-type $instanceType --security-groups $3 --user-data $File
 
-##create autoscaling group
+## Create auto-scaling group
 
-aws autoscaling create-auto-scaling-group --auto-scaling-group-name $autoScalingGrpName --launch-configuration-name $4 --load-balancer-name $loadBalancerName --availability-zones $availabilityZone --load-balancer-names $loadBalancerName --max-size 5 --min-size 0 --desired-capacity 3
+aws autoscaling create-auto-scaling-group --auto-scaling-group-name $autoScalingGrpName --launch-configuration-name $4 --availability-zones $availabilityZone --load-balancer-names $loadBalancerName --max-size 5 --min-size 0 --desired-capacity 3
 
-
+echo "End of Script"
