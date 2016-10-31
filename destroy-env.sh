@@ -1,16 +1,27 @@
 #!/bin/bash
 
+## Retrieving Auto-scaling Group Name
+ 
+autoScalingGrpName=`aws autoscaling describe-auto-scaling-groups --query 'AutoScalingGroups[*].AutoScalingGroupName[]'`
 
-loadBalancerName='itmo-544-jl'
-echo "load balancer is : $loadBalancerName"
-
-autoScalingLCN='jlserverlaunch'
-echo "launch configuration name is : $autoScalingLCN"
-
-autoScalingGrpName='jlwebserver'
 echo "auto scaling group name is : $autoScalingGrpName"
 
-ports='80'
+## Retrieving Load Balancers Name
+
+loadBalancerName=`aws autoscaling describe-load-balancers --auto-scaling-group-name $autoScalingGrpName --query 'LoadBalancers[*].LoadBalancerName[]'`
+
+echo "load balancer is : $loadBalancerName"
+
+## Retrieving Launch Configuration Name
+
+autoScalingLCN=`aws autoscaling describe-auto-scaling-groups --auto-scaling-group-name $autoScaliningGrpName --query 'AutoScalingGroups[*].LaunchConfigurationName[]'`
+
+echo "launch configuration name is : $autoScalingLCN"
+
+## Retrieving the Port number 
+
+ports=`aws elb describe-load-balancers --load-balancer-name $loadBalancerName --query 'LoadBalancerDescriptions[*].ListenerDescriptions[].Listener[].LoadBalancerPort[]'`
+
 echo "port is : $ports"
 
 #Instance Id retreival
@@ -50,3 +61,4 @@ aws autoscaling delete-auto-scaling-group --auto-scaling-group-name $autoScaling
 
 aws autoscaling delete-launch-configuration --launch-configuration-name $autoScalingLCN
 
+echo "Deletion Successful"
