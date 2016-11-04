@@ -16,6 +16,9 @@ echo "hello" > /home/ubuntu/hello.txt
  sudo apt-get install -y unzip
  sudo apt-get install -y git
 
+ curl -sS https://getcomposer.org/installer | php
+ php composer.phar require aws/aws-sdk-php
+
  git clone git@github.com:illinoistech-itm/jlamba1.git
 
 echo "end"
