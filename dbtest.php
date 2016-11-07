@@ -4,6 +4,9 @@ require 'vendor/autoload.php';
 
 use Aws\Rds\RdsClient;
 $client = RdsClient::factory(array(
+'credentials' => array(
+'key'    => 'AKIAIOWQFOCIR4RW633A',
+'secret' => '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'),
 'region'  => 'us-west-2',
 'version' => 'latest'
 ));
