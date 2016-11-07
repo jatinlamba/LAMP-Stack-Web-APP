@@ -1,6 +1,6 @@
 <?php
-
 require 'vendor/autoload.php';
+<<<<<<< HEAD
 
 use Aws\Rds\RdsClient;
 $client = RdsClient::factory(array(
@@ -32,33 +32,22 @@ foreach ($result->getPath('DBInstances/*/Endpoint/Address') as $ep) {
 echo "school database";
 $link = mysqli_connect($endpoint,"jatindb","Jlamba1db","awsDb") or die("Error " . mysqli_error($link));
 
+=======
+echo "begin database";
+$link = mysqli_connect("jl-instance1.cjuyoiserrk7.us-west-2.rds.amazonaws.com:3306","jatindb","Jlamba1db","awsDb") or die("Error " . mysqli_error($link));
+>>>>>>> 3f82105abe5dc8aa1ed61fa3ac6f057c52d25ff5
 /* check connection */
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-/*
-$delete_table = 'DELETE TABLE student';
-$del_tbl = $link->query($delete_table);
-if ($delete_table) {
-        echo "Table student has been deleted";
-}
-else {
-        echo "error!!";
-
-}
-*/
-
-$create_table = 'CREATE TABLE IF NOT EXISTS student
+$create_table = 'CREATE TABLE IF NOT EXISTS students
 (
     id INT NOT NULL AUTO_INCREMENT,
     Name VARCHAR(255),
-    Age INT(32),
+    Age INT(3),
     PRIMARY KEY(id)
 )';
-
-
-
 $create_tbl = $link->query($create_table);
 if ($create_table) {
 	echo "Table is created or No error returned.";
@@ -66,36 +55,23 @@ if ($create_table) {
 else {
         echo "error!!";  
 }
-
 /* INSERT statement */
-if (!($stmt = $link->prepare("INSERT INTO student (id, name, age) VALUES (NULL,?,?)"))) {
+if (!($stmt = $link->prepare("INSERT INTO students (Name, Age) VALUES ('Jatin', 24),('Raveena', 24),('Varun', 28),('Jasmine' , 23),('Jacqueline', 27)"))) {
     echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
 }
-
-$id = 1;
-$name = "Jatin";
-$age = 24;
-
-$stmt->bind_param("si",$name,$age);
-
 if (!$stmt->execute()) {
     echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 }
-
 printf("%d Row inserted.\n", $stmt->affected_rows);
-
-
 /* explicit close recommended */
 $stmt->close();
-
-$link->real_query("SELECT * FROM student");
+$link->real_query("SELECT * FROM students");
 $res = $link->use_result();
-
 echo "Result set order...\n";
 while ($row = $res->fetch_assoc()) {
-    echo " id = " . $row['id'] . "\n";
+    echo " Id = " . $row['id'] . "\n";
+	echo " Name = " . $row['Name'] . "\n";
+	echo " Age = " . $row['Age'] . "\n";
 }
-
 $link->close();
-?>
-
+?>⁠⁠⁠⁠
