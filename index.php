@@ -8,7 +8,7 @@ $bucket ='raw-jal';
 $keyname = 'switchonarex.png';
 
 // $filepath should be absolute path to a file on disk
-$filepath = 'jlamba1/switchonarex.png';
+$filepath = '/root/jlamba1/switchonarex.png';
 
 // Instantiate the client.
 $s3 = S3Client::factory(array(
