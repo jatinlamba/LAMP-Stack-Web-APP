@@ -30,7 +30,7 @@ foreach ($result->getPath('DBInstances/*/Endpoint/Address') as $ep) {
 
 
 echo "school database";
-$link = mysqli_connect($endpoint,"jatindb","Jlamba1db","awsdb") or die("Error " . mysqli_error($link));
+$link = mysqli_connect($endpoint,"jatindb","Jlamba1db","awsDb") or die("Error " . mysqli_error($link));
 
 /* check connection */
 if (mysqli_connect_errno()) {
