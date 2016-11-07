@@ -1,0 +1,32 @@
+#!/bin/bash
+
+echo "hello" > /home/ubuntu/hello.txt
+
+  sudo apt-get update -y
+  sudo apt-get install -y apache2
+
+##  Starting apache2 & packages
+  sudo systemctl enable apache2
+  sudo systemctl start apache2
+
+  sudo apt-get install php5 php5-mysql curl php5-curl zip unzip git -y
+  sudo apt-get libapache2-mod-php5 -y
+  sudo apt-get install php5-cli -y
+
+  sudo service apache2 restart
+
+  php -r 'echo "\n\nYour PHP installation is working fine.\n\n\n";'
+
+##  Installing AWS-PHP-SDK via composer
+
+  export COMPOSER_HOME=/root && /usr/bin/composer.phar self-update 1.0.0-alpha11
+  curl -sS https://getcomposer.org/installer | php
+  php composer.phar require aws/aws-sdk-php
+
+##  Cloning my git repository
+
+  sudo git clone git@github.com:illinoistech-itm/jlamba1.git
+  sudo cp -r vendor/ /var/www/html
+  sudo cp jlamba1/s3test.php /var/www/html
+  sudo cp jlamba1/dbtest.php /var/www/html
+ echo "end"
