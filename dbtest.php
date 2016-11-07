@@ -1,7 +1,7 @@
 <?php
 require 'vendor/autoload.php';
 echo "begin database";
-$link = mysqli_connect("jl-instance1.cjuyoiserrk7.us-west-2.rds.amazonaws.com:3306","jatindb","Jlamba1db","awsdb") or die("Error " . mysqli_error($link));
+$link = mysqli_connect("jl-instance1.cjuyoiserrk7.us-west-2.rds.amazonaws.com:3306","jatindb","Jlamba1db","awsDb") or die("Error " . mysqli_error($link));
 /* check connection */
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
