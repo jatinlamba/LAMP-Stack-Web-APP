@@ -24,41 +24,55 @@ ports=`aws elb describe-load-balancers --load-balancer-name $loadBalancerName --
 
 echo "port is : $ports"
 
-#Instance Id retreival
+## Retrieving rds db instances
+
+dbInstances=`aws rds describe-db-instances --query 'DBInstances[*].[DBInstanceIdentifier]'`
+
+echo "db instance is : $dbInstances"
+
+## Instance Id retreival
 
 instanceId=`aws ec2 describe-instances --query 'Reservations[*].Instances[*].[InstanceId]' --filter Name=instance-state-name,Values=running`
 
-##terminating instances
+## terminating instances
 
 aws ec2 terminate-instances --instance-ids $instanceId --output text --query 'TerminatingInstances[*].CurrentState.Name'
 
-##wait
+## wait
 
 aws ec2 wait instance-terminated --instance-ids $instanceId
 echo $instanceId
 
-##deregistering instances from load-balancer
+## deregistering instances from load-balancer
 
 aws elb deregister-instances-from-load-balancer --load-balancer-name $loadBalancerName --instances $instanceId
 
-##deleting listeners
+## deleting listeners
 
 aws elb delete-load-balancer-listeners --load-balancer-name $loadBalancerName --load-balancer-ports $ports
 
-##deleting load balancers
+## deleting load balancers
 
 aws elb delete-load-balancer --load-balancer-name $loadBalancerName 
 
-##updating autoscaling group
+## updating autoscaling group
 
 aws autoscaling update-auto-scaling-group --auto-scaling-group-name $autoScalingGrpName --launch-configuration-name $autoScalingLCN --min-size 0 --max-size 0
 
-##deleting autoscaling group
+## deleting autoscaling group
 
 aws autoscaling delete-auto-scaling-group --auto-scaling-group-name $autoScalingGrpName --force-delete  
 
-##deleting launch configuration
+## deleting launch configuration
 
 aws autoscaling delete-launch-configuration --launch-configuration-name $autoScalingLCN
+
+## deleting rds db instances
+
+aws rds delete-db-instance --db-instance-identifier $dbInstances --skip-final-snapshot
+
+## wait
+
+aws rds wait db-instance-deleted --db-instance-identifier $dbInstances
 
 echo "Deletion Successful"
