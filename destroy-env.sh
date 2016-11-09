@@ -77,7 +77,6 @@ aws rds wait db-instance-deleted --db-instance-identifier $dbInstances
 
 ## deleting buckets
 
-aws s3 rb s3://raw-jal --force
-aws s3 rb s3://finished-jal --force
+aws s3 ls | awk '{print $3}' | while read bucket; do echo $bucket; aws s3 rb s3://$bucket --force; done;
 
 echo "Deletion Successful"
