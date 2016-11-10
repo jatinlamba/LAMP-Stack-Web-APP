@@ -5,5 +5,6 @@
 # Database Password: Jlamba1db
 # Database instance identifier: jl-instance1
 
-# sns topic name: awscli
-# sqs queue name: inclassSQS
+# SNS topic name: awscli
+# SQS queue name: inclassSQS
+# Bucket Names: raw-jal, finished-jal
