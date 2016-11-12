@@ -27,7 +27,7 @@ public class MaxTemperatureWithCombiner {
 
     job.setOutputKeyClass(Text.class);
     job.setOutputValueClass(IntWritable.class);
-    job.setNumReduceTasks(4);    
+    job.setNumReduceTasks(1);    
     System.exit(job.waitForCompletion(true) ? 0 : 1);
   }
 }
