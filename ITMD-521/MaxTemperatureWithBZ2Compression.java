@@ -31,7 +31,7 @@ public class MaxTemperatureWithBZ2Compression {
     job.setMapperClass(MaxTemperatureMapper.class);
     job.setCombinerClass(MaxTemperatureReducer.class);
     job.setReducerClass(MaxTemperatureReducer.class);
-    job.setNumReduceTasks(2);
+    job.setNumReduceTasks(1);
     System.exit(job.waitForCompletion(true) ? 0 : 1);
   }
 }
