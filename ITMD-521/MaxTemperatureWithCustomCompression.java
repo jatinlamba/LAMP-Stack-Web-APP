@@ -40,7 +40,7 @@ public class MaxTemperatureWithCustomCompression {
     job.setMapperClass(MaxTemperatureMapper.class);
     job.setCombinerClass(MaxTemperatureReducer.class);
     job.setReducerClass(MaxTemperatureReducer.class);
-    job.setNumReduceTasks(1);   
+    job.setNumReduceTasks(2);   
     
     System.exit(job.waitForCompletion(true) ? 0 : 1);
   }
