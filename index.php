@@ -13,7 +13,7 @@ header("location: welcome.php");
 </head>
 <body>
 <div id="main">
-<h1>PHP Login Session Example</h1>
+<h1>Login Session </h1>
 <div id="login">
 <h2>Login Form</h2>
 <form action="" method="post">

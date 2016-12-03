@@ -1,6 +1,6 @@
 <?php
 require 'vendor/autoload.php';
-echo "begin database<br />";
+echo "Starting Database<br />";
 $link = mysqli_connect("jl-instance1.cjuyoiserrk7.us-west-2.rds.amazonaws.com","jatindb","Jlamba1db","school",3306) or die("Error " . mysqli_error($link));
 /* check connection */
 if (mysqli_connect_errno()) {
@@ -41,3 +41,19 @@ while ($row = $res->fetch_assoc()) {
 }
 $link->close();
 ?>
+
+<html>
+<head>
+<meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css">
+<title>Gallery Page</title>
+<style>
+    body {
+        color: navy !important;;
+        background-color: lightblue !important;;
+        font-family: "Comic Sans MS", cursive, sans-serif ;
+    }
+    </style>
+</head>
+<body>
+

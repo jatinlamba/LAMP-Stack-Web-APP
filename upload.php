@@ -1,14 +1,24 @@
 
-
 <?php
 
 session_start();
 ?>
 <html>
-<head><title>Best Page Ever</title></head>
+<head>
+<meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css">
+<title>Upload Page</title>
+<style>
+    body {
+        color: navy !important;;
+        background-color: lightblue !important;;
+        font-family: "Comic Sans MS", cursive, sans-serif ;
+    }
+    </style>
+</head>
 <body>
-<a href="gallery.php"> Gallery </a> <a href="upload.php"> Upload </a>
-<h1> World</h1>
+<a href="gallery.php"> Gallery </a> <a href="welcome.php"> Welcome </a>
+<h1> Upload </h1>
 
 
 <form enctype="multipart/form-data" action="uploader.php" method="POST">

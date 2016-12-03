@@ -29,4 +29,12 @@ echo "hello" > /home/ubuntu/hello.txt
   sudo cp -r vendor/ /var/www/html
   sudo cp jlamba1/s3test.php /var/www/html
   sudo cp jlamba1/dbtest.php /var/www/html
+  sudo cp jlamba1/testdb.php /var/www/html
+  sudo cp jlamba1/check.php /var/www/html
+  sudo cp jlamba1/index.php /var/www/html
+  sudo cp jlamba1/welcome.php /var/www/html
+  sudo cp jlamba1/gallery.php /var/www/html
+  sudo cp jlamba1/upload.php /var/www/html
+  sudo cp jlamba1/uploader.php /var/www/html
+
  echo "end"
