@@ -15,7 +15,7 @@ $sql_upload_chk="select upload_status from school.controller";
 $result_upload_ckh = $conn->query($sql_upload_chk);
 $status = 0;
     while($row = $result_upload_ckh->fetch_assoc()) {
-        $status=$row["upload"];
+        $status=$row["upload_status"];
 }
 ?>
 <html>

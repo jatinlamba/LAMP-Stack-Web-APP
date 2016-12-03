@@ -26,7 +26,7 @@ $create_table = 'CREATE TABLE IF NOT EXISTS ITEMS
 )';
 
 /* execute querry*/
-$create_tbl = $link01->query($create_table);
+$create_tbl = $link->query($create_table);
 if ($create_table) {
         echo " Table Items Created Successfully <br/> ";
 }
@@ -35,6 +35,6 @@ else {
 
 }
 
-$link01->close();
+$link->close();
 ?>
 

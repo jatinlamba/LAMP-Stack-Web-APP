@@ -2,9 +2,6 @@
 
 <?php
 include('check.php'); // Includes Login Script
-if(isset($_SESSION['username'])){
-header("location: welcome.php");
-}
 ?>
 <!DOCTYPE html>
 <html>
