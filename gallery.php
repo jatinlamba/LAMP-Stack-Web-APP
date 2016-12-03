@@ -44,10 +44,20 @@ if (mysqli_connect_errno()) {
 $username = $_SESSION['username'];
 $res = mysqli_query($link, "select * from ITEMS where username='$username'");
 
+ if ($res->num_rows > 0)
+{
  while ($row = $res->fetch_assoc()) {
         $imageraw = $row['s3rawurl'];
-    echo "<img src='$imageraw' >";
     echo "<br>";
+    echo  "<div style='padding-right:10px;float:left'><img src='". $imageraw . "' height=450 width=450 /> </div>";
+   #echo "<br>";
+}
+}
+else
+{
+        echo "<br>";
+	echo "<br>";
+	echo "Your gallery is empty! Use the Upload link to add some images to your gallery";
 }
 
 $link->close();
