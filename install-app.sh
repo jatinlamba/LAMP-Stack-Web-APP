@@ -12,6 +12,7 @@ echo "hello" > /home/ubuntu/hello.txt
   sudo apt-get install php5 php5-mysql curl php5-curl zip unzip git -y
   sudo apt-get libapache2-mod-php5 -y
   sudo apt-get install php5-cli -y
+  sudo apt-get install mysql-client -y
 
   sudo service apache2 restart
 
@@ -36,5 +37,8 @@ echo "hello" > /home/ubuntu/hello.txt
   sudo cp jlamba1/gallery.php /var/www/html
   sudo cp jlamba1/upload.php /var/www/html
   sudo cp jlamba1/uploader.php /var/www/html
-
+  sudo cp jlamba1/backup.php /var/www/html
+  sudo cp jlamba1/uploadcontrol.php /var/www/html
+  sudo cp jlamba1/admin.php /var/www/html
+  sudo cp jlamba1/dbitems.php /var/www/html
  echo "end"
