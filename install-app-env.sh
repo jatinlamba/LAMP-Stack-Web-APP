@@ -40,7 +40,7 @@ aws sns create-topic --name awscli
 
 ##SQS queue created
 
-aws sqs create-queue --queue-name inclassSQS
+aws sqs create-queue --queue-name jatinSQS
 
 ## creating s3 buckets
 
