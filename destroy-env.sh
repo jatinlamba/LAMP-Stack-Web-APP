@@ -95,4 +95,6 @@ aws sqs delete-queue --queue-url $sqs_queue
 
 ## deleting sns topics
 
+aws sns delete-topic --topic-arn $sns_topic_arn
+
 echo "Deletion Successful"
