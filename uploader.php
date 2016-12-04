@@ -122,7 +122,7 @@ $sqsclient = new Aws\Sqs\SqsClient([
         echo "$queueUrl";
 
         //echo $sqsresult['QueueURL'];
-        //$queueUrl = $sqsresult['QueueURL'];
+        $queueUrl = $sqsresult['QueueURL'];
 
         $sqsresult = $sqsclient->sendMessage([
             'MessageBody' => $receipt, // REQUIRED
