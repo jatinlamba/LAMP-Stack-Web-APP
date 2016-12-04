@@ -30,6 +30,11 @@ dbInstances=`aws rds describe-db-instances --query 'DBInstances[*].[DBInstanceId
 
 echo "db instance is : $dbInstances"
 
+## Retrieving sqs queues url
+
+sqs_queue=$(aws sqs list-queues | awk '{print $2}')
+echo $sqs_queue
+
 ## Instance Id retreival
 
 instanceId=`aws ec2 describe-instances --query 'Reservations[*].Instances[*].[InstanceId]' --filter Name=instance-state-name,Values=running`
@@ -78,5 +83,9 @@ aws rds wait db-instance-deleted --db-instance-identifier $dbInstances
 ## deleting buckets
 
 aws s3 ls | awk '{print $3}' | while read bucket; do echo $bucket; aws s3 rb s3://$bucket --force; done;
+
+## deleting sqs queues
+
+aws sqs delete-queue --queue-url $sqs_queue
 
 echo "Deletion Successful"
