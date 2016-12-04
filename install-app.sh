@@ -37,6 +37,7 @@ echo "hello" > /home/ubuntu/hello.txt
   sudo cp jlamba1/uploadcontrol.php /var/www/html
   sudo cp jlamba1/admin.php /var/www/html
   sudo cp jlamba1/dbitems.php /var/www/html
+  sudo cp jlamba1/edit.php /var/www/html
   
   echo "Place the cron job in /var/spool/cron folder..."
 (crontab -1 2>/dev/null; echo "* * * * * /usr/bin/php /var/www/html/edit.php") | crontab -
