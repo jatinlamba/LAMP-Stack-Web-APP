@@ -90,21 +90,8 @@ if (!$stmt->execute()) {
 
 printf("<br /> %d Row inserted. <br />", $stmt->affected_rows);
 
-
 /* explicit close recommended */
 $stmt->close();
-
-// SELECT *
-
-$link->real_query("SELECT * FROM items");
-$res = $link->use_result();
-
-echo "Result set order...\n";
-while ($row = $res->fetch_assoc()) {
-    echo " id = " . $row['id'] . "\n";
-}
-
-
 $link->close();
 
 // PUT MD5 hash of raw URL to SQS QUEUE
@@ -117,8 +104,8 @@ $sqsclient = new Aws\Sqs\SqsClient([
         $sqsresult = $sqsclient->getQueueUrl([
             'QueueName' => 'jatinSQS', // REQUIRED
         ]);
-        echo $sqsresult['QueueURL'];
-        $queueUrl = $sqsresult['QueueURL'];
+        echo $sqsresult['QueueUrl'];
+        $queueUrl = $sqsresult['QueueUrl'];
 
         $sqsresult = $sqsclient->sendMessage([
             'MessageBody' => $receipt, // REQUIRED
