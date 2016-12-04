@@ -6,9 +6,9 @@ echo "hello" > /home/ubuntu/hello.txt
   sudo apt-get install -y apache2
   sudo systemctl enable apache2
   sudo systemctl start apache2
-  sudo apt-get install php php-mysql curl php-curl zip unzip git -y
-  sudo apt-get install libapache2-mod-php -y
-  sudo apt-get install php-cli -y
+  sudo apt-get install php5 php5-mysql php5-gd curl php5-curl zip unzip git -y
+  sudo apt-get install libapache2-mod-php5 -y
+  sudo apt-get install php5-cli -y
   sudo apt-get install mysql-client -y
   sudo service apache2 restart
   
