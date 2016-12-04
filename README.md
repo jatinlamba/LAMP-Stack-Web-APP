@@ -21,8 +21,8 @@
 # Step 7:  Run welcome.php
 # Step 8:  Run gallery.php
 # Step 9:  Run upload.php
-# Step 10: Run edit.php
-# Step 11: Run gallery.php 
+# Step 10: Wait for cron to work and let it stamp the image till the sleep time
+# Step 11: Run gallery.php  
 
 # See the finished stamped image.
 
