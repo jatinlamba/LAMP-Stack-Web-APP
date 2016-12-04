@@ -7,22 +7,18 @@ echo "hello" > /home/ubuntu/hello.txt
 # sudo apt-get install php php-mysql mysql-client php-gd php-cli curl php-curl zip unzip git libapache2-mod-php -y 
 
 #  sudo service apache2 restart
-
-
-  sudo apt-get install -y language-pack-en-base
-  sudo LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php
-  sudo apt-get update -y
-  sudo apt-get install -y apache2
-
-##  Starting apache2 & packages
-  sudo systemctl enable apache2
-  sudo systemctl start apache2
-  
-  apt-cache search php7
-  sudo apt-get install php7.0
-  sudo apt-get install php7.0 php7.0-cli php7.0-fpm php7.0-gd php7.0-json php7.0-mysql php7.0-readline
-  sudo service apache2 restart
-  sudo apt-get upgrade
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:ondrej/php-7.0
+sudo apt-get update
+sudo apt-get purge php5-fpm
+sudo apt-get install php7.0-cli php7.0-common libapache2-mod-php7.0 php7.0 php7.0-mysql php7.0-fpm php7.0-curl php7.0-gd php7.0-bz2
+cd /var/www/html/
+sudo wget https://files.phpmyadmin.net/phpMyAdmin/4.5.3.1/phpMyAdmin-4.5.3.1-all-languages.zip
+sudo apt-get install unzip git 
+sudo unzip phpMyAdmin-4.5.3.1-all-languages.zip
+sudo mv phpMyAdmin-4.5.3.1-all-languages/ phpmyadmin/
+sudo mkdir -m 777 phpmyadmin/config/
+sudo /etc/init.d/apache2 restart
   
   php -r 'echo "\n\nYour PHP installation is working fine.\n\n\n";'
 
