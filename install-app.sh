@@ -4,10 +4,10 @@ echo "hello" > /home/ubuntu/hello.txt
 
   
 
- /* sudo apt-get install php php-mysql mysql-client php-gd php-cli curl php-curl zip unzip git libapache2-mod-php -y 
+# sudo apt-get install php php-mysql mysql-client php-gd php-cli curl php-curl zip unzip git libapache2-mod-php -y 
 
-  sudo service apache2 restart
-*/
+#  sudo service apache2 restart
+
 
   sudo apt-get install -y language-pack-en-base
   sudo LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php
