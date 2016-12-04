@@ -4,7 +4,7 @@
 
 session_start();
 
-#echo "Your email is: " .  $_SESSION['username'];
+echo "Logged in as: " .  $_SESSION['username'];
 $username = $_SESSION['username'];
 #echo "\n" . md5($username);
 
@@ -25,39 +25,33 @@ $_SESSION['receipt'] = md5($username);
     </style>
 </head>
 <body>
-<div id="main">
-<h1>Gallery </h1>
-<a href="welcome.php"> Welcome </a> <a href="upload.php"> Upload </a>
-
+<br>
+<br>
+<a href="welcome.php"> Home </a> | <a href="index.php"> Logout </a>
 <?php
-
 $link = mysqli_connect("jl-instance1.cjuyoiserrk7.us-west-2.rds.amazonaws.com","jatindb","Jlamba1db","school",3306) or die("Error " . mysqli_error($link));
-
 /* check connection */
 if (mysqli_connect_errno()) {
     printf("Connect failed: <br/> ", mysqli_connect_error());
     exit();
 }
-
-#echo "Your email is: " .  $_SESSION['username'];
-
 $username = $_SESSION['username'];
 $res = mysqli_query($link, "select * from ITEMS where username='$username'");
-
- if ($res->num_rows > 0)
+if ($res->num_rows > 0)
 {
  while ($row = $res->fetch_assoc()) {
         $imageraw = $row['s3rawurl'];
+        $imagefin =$row["s3finishedurl"];
     echo "<br>";
-    echo  "<div style='padding-right:10px;float:left'><img src='". $imageraw . "' height=450 width=450 /> </div>";
-   #echo "<br>";
+    echo  "<div style='padding-right:10px;float:left'><img src='". $imageraw . "' height=250 width=250 /> </div>";
+         echo  "<div style='padding-right:10px;float:left'><img src='". $imagefin . "' height=250 width=250 /> </div>";
 }
 }
 else
 {
         echo "<br>";
-	echo "<br>";
-	echo "Your gallery is empty! Use the Upload link to add some images to your gallery";
+        echo "<br>";
+echo " Empty gallery! Use the Upload link to add some images to your gallery";
 }
 
 $link->close();

@@ -19,7 +19,7 @@ $create_table = 'CREATE TABLE IF NOT EXISTS ITEMS
     username VARCHAR(80),
     phone varchar(10),
     s3rawurl varchar(80),
-    s3finishedurl varchar(80),
+    s3finishedurl varchar(255),
     issubscribed VARCHAR(20),
     status int,
     receipt VARCHAR(80)

@@ -115,14 +115,11 @@ $sqsclient = new Aws\Sqs\SqsClient([
 
         // Code to retrieve the Queue URLs
         $sqsresult = $sqsclient->getQueueUrl([
-            'QueueName' => 'inclassSQS', // REQUIRED
+            'QueueName' => 'jatinSQS', // REQUIRED
         ]);
 
-        $queueUrl = $sqsresult->get('QueueUrl');
-        echo "$queueUrl";
-
-        //echo $sqsresult['QueueURL'];
-        //$queueUrl = $sqsresult['QueueURL'];
+        echo $sqsresult['QueueUrl'];
+        $queueUrl = $sqsresult['QueueURL'];
 
         $sqsresult = $sqsclient->sendMessage([
             'MessageBody' => $receipt, // REQUIRED
