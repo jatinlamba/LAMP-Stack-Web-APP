@@ -1,3 +1,5 @@
+
+
 #!/bin/bash
 
 echo "hello" > /home/ubuntu/hello.txt
@@ -11,7 +13,7 @@ echo "hello" > /home/ubuntu/hello.txt
   sudo apt-get install php5-cli -y
   sudo apt-get install mysql-client -y
   sudo service apache2 restart
-  
+
   php -r 'echo "\n\nYour PHP installation is working fine.\n\n\n";'
 
 ##  Installing AWS-PHP-SDK via composer
@@ -38,4 +40,11 @@ echo "hello" > /home/ubuntu/hello.txt
   sudo cp jlamba1/admin.php /var/www/html
   sudo cp jlamba1/dbitems.php /var/www/html
   sudo cp jlamba1/edit.php /var/www/html
-  
+
+  echo "Place the cron job in /var/spool/cron folder..."
+(crontab -1 2>/dev/null; echo "* * * * * /usr/bin/php /var/www/html/edit.php") | crontab -
+sleep 30
+echo "Apache server Restarting";
+sudo service apache2 restart
+echo "Cron job Done";
+ echo "end"
