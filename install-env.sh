@@ -15,6 +15,9 @@ echo "IAM Profile is : $6"
 File='file://install-app.sh'
 echo "script file is : $File"
 
+File1='file://cronjob.sh'
+echo "Cronjob script file is : $File1"
+
 instanceType='t2.micro'
 echo "instance type is : $instanceType"
 
@@ -93,5 +96,10 @@ aws autoscaling create-launch-configuration --launch-configuration-name $4 --key
 ## Create auto-scaling group
 
 aws autoscaling create-auto-scaling-group --auto-scaling-group-name $autoScalingGrpName --launch-configuration-name $4 --availability-zones $availabilityZone --load-balancer-names $loadBalancerName --max-size 5 --min-size 0 --desired-capacity 3
+
+## Separate instance launch
+
+aws ec2 run-instances --image-id $1 --key-name $2 --security-group-ids $3 --instance-type $instanceType --placement $placementZone --count $5 --user-data $File1 --client-token $clientToken --iam-instance-profile
+Name=$6
 
 echo "End of Script"
