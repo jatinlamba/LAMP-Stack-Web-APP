@@ -99,7 +99,6 @@ aws autoscaling create-auto-scaling-group --auto-scaling-group-name $autoScaling
 
 ## Separate instance launch
 
-aws ec2 run-instances --image-id $1 --key-name $2 --security-group-ids $3 --instance-type $instanceType --placement $placementZone --count $5 --user-data $File1 --client-token $clientToken --iam-instance-profile
-Name=$6
+aws ec2 run-instances --image-id $1 --key-name $2 --security-group-ids $3 --instance-type $instanceType --placement $placementZone --count 1 --user-data $File1  --iam-instance-profile Name=$6
 
 echo "End of Script"
