@@ -27,5 +27,7 @@
 
 # See the finished stamped image.
 
+# Few screenshots of the running application have have been attached in a file name screenshots for your reference.
+
 # My ami Id was created in php5 environment so you need to run it in php5 environment only!!
 
