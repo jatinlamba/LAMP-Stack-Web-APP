@@ -27,5 +27,5 @@
 
 # See the finished stamped image.
 
-# My ami Id was created in php5 environment so you need to look for it!!
+# My ami Id was created in php5 environment so you need to run it in php5 environment only!!
 
