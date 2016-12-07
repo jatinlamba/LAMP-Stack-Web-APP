@@ -95,7 +95,7 @@ aws autoscaling create-launch-configuration --launch-configuration-name $4 --key
 
 ## Create auto-scaling group
 
-aws autoscaling create-auto-scaling-group --auto-scaling-group-name $autoScalingGrpName --launch-configuration-name $4 --availability-zones $availabilityZone --load-balancer-names $loadBalancerName --max-size 5 --min-size 0 --desired-capacity 3
+aws autoscaling create-auto-scaling-group --auto-scaling-group-name $autoScalingGrpName --launch-configuration-name $4 --availability-zones $availabilityZone --load-balancer-names $loadBalancerName --max-size 5 --min-size 0 --desired-capacity $5
 
 ## Separate instance launch
 
